@@ -11,13 +11,13 @@
     <title>Takum-Products - @yield('title')</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/cover.css" rel="stylesheet">
+    <link href="/css/cover.css" rel="stylesheet">
 
-    <script src="js/jquery.min.js"></script>    
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>    
+    <script src="/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
       window.setTimeout(function() {
@@ -42,8 +42,8 @@
               <h3 class="masthead-brand">Takum-Products</h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Products</a></li>
-                  <li><a href="#">Categories</a></li>
+                  <li @yield('actP') ><a href="{{ url('products')}}">Products</a></li>
+                  <li @yield('actC') ><a href="{{ url('categories')}}">Categories</a></li>
                 </ul>
               </nav>
             </div>

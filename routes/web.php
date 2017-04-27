@@ -12,11 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/a', function () {
-    return view('new_category');
+	return view('index');
 });
 
 Route::resource('/categories', 'Categories');
+
+Route::resource('/products', 'Products');

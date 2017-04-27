@@ -1,6 +1,6 @@
 @extends('layouts.main')
-@section('title', 'New Category')
-@section('actC', 'class=active')
+@section('title', 'New Product')
+@section('actP', 'class=active')
 @section('content')
 
 
@@ -20,7 +20,7 @@
 @foreach ($errors->all() as $error)
     <p><span style="color:red;">{{ $error }}</span></p>
 @endforeach
-<form class="form-horizontal lead" role="form" method="POST" action="{{ url('categories')}}">
+<form class="form-horizontal lead" role="form" method="POST" action="{{ url('products')}}">
   {{ csrf_field() }}
   <div class="form-group">
     <label class="control-label col-sm-3">Title:</label>
@@ -32,6 +32,22 @@
     <label class="control-label col-sm-3">Description:</label>
     <div class="col-sm-9">
       <textarea id="description" class="form-control" rows="3" placeholder="Description" name="description" required></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">Value:</label>
+    <div class="col-sm-9">
+      <input id="value" type="number" class="form-control" placeholder="Value" name="value" min="1" required/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">Category:</label>
+    <div class="col-sm-9">
+      <select class="form-control" name="category">
+        @foreach($categories as $category)
+         <option value="{{ $category->id }}">{{ $category->title }}</option>
+        @endforeach
+      </select>   
     </div>
   </div>
   <div class="form-group">

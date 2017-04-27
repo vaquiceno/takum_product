@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+use App\Product;
 use DB;
 
-class Categories extends Controller
+class Products extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class Categories extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->select('id', 'title', 'description')->get();
-        return view('view_category', ['categories'=> $categories]);
+        $products = DB::table('products')->join('categories', 'categories.id', '=', 'products.category_id')->select('products.id', 'products.title', 'products.description', 'products.value', 'categories.title as category')->get();
+        return view('view_product', ['products'=> $products]);
     }
 
     /**
@@ -26,7 +26,8 @@ class Categories extends Controller
      */
     public function create()
     {
-        return view('new_category');
+        $categories = DB::table('categories')->select('id', 'title')->get();
+        return view('new_product', ['categories'=> $categories]);
     }
 
     /**
@@ -39,13 +40,17 @@ class Categories extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'value' => 'required',
+            'category' => 'required',
             ]);
-        $category = new Category();
-        $category->title = $request->title;
-        $category->description = $request->description;
+        $product = new Product();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->value = $request->value;
+        $product->category_id = $request->category;
         
-        if ($category->save()){
+        if ($product->save()){
             return back()->with('msj', 'S');
         }else{
             return back()->with('msj', 'N');
