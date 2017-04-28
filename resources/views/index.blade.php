@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Welcome')
+@section('title', trans('messages.index_title'))
 @section('content')
-<p>In this app you can add, modify and delete products and categories</p>
+<p>{{trans('messages.index_content')}}</p>
 @stop

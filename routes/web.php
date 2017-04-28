@@ -15,6 +15,8 @@ Route::get('/', function () {
 	return view('index');
 });
 
+Route::post('/language', ['Middleware' => 'languageSwitcher', 'uses'=>'Languages@index']);
+
 Route::resource('/categories', 'Categories');
 
 Route::resource('/products', 'Products');
