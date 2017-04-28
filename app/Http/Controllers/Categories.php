@@ -71,7 +71,8 @@ class Categories extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('edit_category', ['category'=> $category]);
     }
 
     /**
@@ -83,7 +84,19 @@ class Categories extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required'
+            ]);
+        $category = Category::findOrFail($id);
+        $category->title = $request->title;
+        $category->description = $request->description;
+        
+        if ($category->save()){
+            return back()->with('msj', 'S');
+        }else{
+            return back()->with('msj', 'N');
+        }
     }
 
     /**
@@ -94,6 +107,7 @@ class Categories extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::destroy($id);
+        return back();
     }
 }

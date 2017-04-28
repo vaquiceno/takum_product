@@ -8,6 +8,7 @@
 			<th class="text-center">Id</th>
 			<th class="text-center">Title</th>
 			<th class="text-center">Description</th>
+			<th class="text-center"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,6 +17,14 @@
     		<td>{{ $category->id }}</td>
     		<td>{{ $category->title }}</td>
     		<td>{{ $category->description }}</td>
+    		<td>
+    			<form method="POST" action="{{route('categories.destroy', $category->id)}}">
+    				{{ csrf_field() }}
+    				<a href="{{route('categories.edit', $category->id)}}" class = "btn btn-success btn-xs">Update</a>
+    				<input type="hidden" name="_method" value="DELETE">
+    				<input type = "submit" name="submit" class = "btn btn-warning btn-xs" value="Delete"></input>
+    			</form>
+    		</td>
     	</tr>
     @endforeach		
 	</tbody>

@@ -54,12 +54,6 @@
             @yield('content')
           </div>
 
-          <div class="mastfoot">
-            <div class="inner">
-              <p>Víctor Quiceno. 2017</p>
-            </div>
-          </div>
-
         </div>
 
       </div>

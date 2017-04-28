@@ -76,7 +76,9 @@ class Products extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = DB::table('categories')->select('id', 'title')->get();
+        return view('edit_product', ['product'=> $product, 'categories'=> $categories]);
     }
 
     /**
@@ -88,7 +90,23 @@ class Products extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'value' => 'required',
+            'category' => 'required',
+            ]);
+        $product = Product::findOrFail($id);
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->value = $request->value;
+        $product->category_id = $request->category;
+        
+        if ($product->save()){
+            return back()->with('msj', 'S');
+        }else{
+            return back()->with('msj', 'N');
+        }
     }
 
     /**
@@ -99,6 +117,7 @@ class Products extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return back();
     }
 }
